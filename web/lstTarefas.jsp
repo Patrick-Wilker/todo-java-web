@@ -38,17 +38,13 @@
                 margin-top: 50px;
             }
             
-            main ul li+li{
-                margin-top: 10px;
-            }
-            
             main ul li{
                 list-style: none;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 max-width: 700px;
-                margin: auto;
+                margin: 5px auto;
                 
                 background: rgba(0, 113, 227, 0.3);
                 border-radius: 4px;
@@ -63,7 +59,65 @@
                 border-radius: 4px;
                 padding: 30px 15px;
             }
+            
+            
+            
+            .delete{
+                cursor: pointer;
+            }
+            .background{
+                background: rgba(0, 0, 0, 0.5);
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+                display: none;
+            }
+            .background p{
+                background: none;
+            }
+            .box{
+                width: 592px;
+                height: 233px;
+                background: #fff;
+                padding: 32px;
+            }
+            button{
+                border: 0;
+                border-radius: 4px;
+                padding: 8px 25px;
+                font-weight: bold;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            button.excluir{
+                color: #ffffff;
+                background: #BD2426;
+            }
         </style>
+        
+        <script>
+            function confirme(id){
+                document.getElementById('modal').style.display = 'flex';
+                document.getElementById('excluir').addEventListener('click', event => {
+                    excluir(id);
+                });
+            }
+            function cancelar(){
+                document.getElementById('modal').style.display = 'none';
+            }
+            function excluir(id){
+                window.location.href = 'exclui.jsp?id=' + id;
+                document.getElementById('modal').style.display = 'none';
+            }
+            
+        </script>
+        
     </head>
     <body>
         <% 
@@ -83,9 +137,26 @@
                     <% out.println(tar.getTexto()); %>
                     <div>
                         <a href="alterando.jsp?id=<%out.println(tar.getId());%>&texto=<% out.println(tar.getTexto());%>" class="material-icons">mode_edit</a>                        
-                        <a href="exclui.jsp?id=<% out.println(tar.getId()); %>" class="material-icons">delete</a>
+                        <!--<a href="exclui.jsp?id=<% out.println(tar.getId()); %>" class="material-icons">delete</a>  -->                   
+                        <a onclick="confirme(<% out.println(tar.getId()); %>)" class="material-icons delete">delete</a>
+
                     </div>
                 </li>
+                
+                <div class="background" id="modal">
+                    <div class="box">
+                        <h1>Excluir tarefa</h1>
+
+                        <p>Tem certeza que deseja excluir esta tarefa?</p>
+
+                        <div>
+                            <button type="button" class="cancelar" onclick="cancelar()">Cancelar</button>
+                            <button type="button" class="excluir" id="excluir" >Excluir</button>
+                        </div>
+                    </div>
+                </div>
+                
+                
                 <% } %>
                 <% if(lstTarefa.isEmpty()) { %>
                     <p>Você  não tem tarefas!</p>
