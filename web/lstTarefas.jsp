@@ -104,7 +104,7 @@
         <script>
             function confirme(id){
                 document.getElementById('modal').style.display = 'flex';
-                document.getElementById('excluir').addEventListener('click', event => {
+                document.getElementById('excluir').addEventListener('click', function() {
                     excluir(id);
                 });
             }
