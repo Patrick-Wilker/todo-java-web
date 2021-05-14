@@ -1,5 +1,7 @@
 <h1 align="center">ToDo</h1>
 
+![todolist-javaweb](https://user-images.githubusercontent.com/38691922/118209659-6aa3ef80-b43f-11eb-9687-a6175bce90ed.png)
+
 <h2>Projeto</h2>
 
 Trata-se de um sistema de lista de tarefas com objetivo de estudar Java Web.
